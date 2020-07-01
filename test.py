@@ -17,7 +17,7 @@ def get_date_time(line):
     else:
         Date = matchesDate.groups()[0]
         Time = matchesDate.groups()[1]
-        return Date, Time
+        return str(Date), str(Time)
 
 
 def get_user(line):
@@ -31,9 +31,9 @@ def get_user(line):
         Number = matchesNumber.group()
 
     if Name:
-        return Name
+        return str(Name)
     else:
-        return Number
+        return str(Number)
 
 
 def get_message(line):
@@ -53,34 +53,40 @@ def get_message(line):
 
 def get_data(fileName):
 
-    if fileName is None:
-
-        sys.exit()
-
+    totalTable = []
     with open(fileName, 'r') as chat:
         for line in chat:
-            try:
-                date, time = get_date_time(line)
-            except:
-                pass
+            line = line.replace('\u200e', '')
+            if line[0] != '[':
+                totalTable.append([' ', ' ', ' ', line.replace('\n', '')])
+            else:
+                try:
+                    date, time = get_date_time(line)
+                except:
+                    pass
 
-            try:
-                user = get_user(line)
-            except:
-                pass
+                try:
+                    user = get_user(line)
+                except:
+                    pass
 
-            try:
-                message = get_message(line)
-            except:
-                pass
+                try:
+                    message = get_message(line)
+                except:
+                    pass
 
-            print(date, time, user, message)
+                totalTable.append([date, time, user, message.replace('\n', '')])
+
+    return totalTable
 
 
 if __name__ == '__main__':
-    fileName = str(sys.argv[1])
-    if fileName is None:
-        print("Please put a file init na madarchod")
+    try:
+        fileName = str(sys.argv[1])
+    except Exception:
+        print("Please put a file in it")
         sys.exit()
-    else:
-        get_data(fileName)
+
+    data = get_data(fileName)
+    for i in data:
+        print(i)
