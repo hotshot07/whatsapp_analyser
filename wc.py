@@ -51,6 +51,7 @@ all_stopwords.append("i’m")
 
 hindi_stoplist = open("hindi_stoplist.txt").readlines()
 hindi_stoplist = [i.replace('\n', '') for i in hindi_stoplist]
+
 all_stopwords.append(hindi_stoplist)
 
 without_stopwords = [word for word in tokenized_list if not word in all_stopwords]
@@ -68,10 +69,9 @@ for data in without_stopwords:
 
 with_string = " ".join(without_links)
 
-wordcloud = WordCloud(width=1800, height=900).generate(with_string)
-plt.figure(figsize=(20, 10))
-
-
-plt.imshow(wordcloud, interpolation='bilinear')
+wordcloud = WordCloud(width=1600, height=800).generate(with_string)
+plt.figure(figsize=(20, 10), facecolor='k')
 plt.axis("off")
+plt.imshow(wordcloud, interpolation='bilinear')
+plt.tight_layout(pad=0)
 plt.show()

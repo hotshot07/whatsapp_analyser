@@ -25,7 +25,7 @@ def get_date_time_day(line):
         Time = matchesDate.groups()[1]
         my_date_str = str(Date) + ' ' + str(Time)
         try:
-            datetime_obj = parser.parse(my_date_str)
+            datetime_obj = parser.parse(my_date_str, dayfirst=True)
             Date = datetime_obj.date().isoformat()
             Time = datetime_obj.strftime("%H:%M:%S")
             Day = calendar.day_name[datetime_obj.weekday()]
