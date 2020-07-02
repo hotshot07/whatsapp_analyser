@@ -2,10 +2,6 @@ import re
 import sys
 import numpy as np
 import pandas as pd
-import nltk
-from nltk.corpus import stopwords
-from nltk.tokenize import word_tokenize
-from collections import Counter
 from datetime import datetime
 import calendar
 from dateutil import parser
@@ -36,7 +32,6 @@ def get_date_time_day(line):
         except:
             Date, Time, Day = np.NaN, np.NaN, np.NaN
 
-    print(Date, Day, Time)
     return Date, Day, Time
 
 

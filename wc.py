@@ -4,9 +4,14 @@ from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
 from nltk.corpus import stopwords
 import string
 import matplotlib.pyplot as plt
+import re
 
 import warnings
 warnings.filterwarnings("ignore")
+
+youtube_regex = r"^(https?\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$"
+
+all_links = r"^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$"
 
 df = pd.read_csv("userdata/chat.csv", index_col=0)
 
@@ -18,6 +23,7 @@ tokenized_list = []
 for i in word_list:
     sep_wordlist = i.split(sep=' ')
     for word in sep_wordlist:
+        word = word.lower().strip()
         tokenized_list.append(word)
 
 
@@ -40,26 +46,32 @@ all_stopwords.append('gif')
 all_stopwords.append('deleted')
 all_stopwords.append('sticker')
 all_stopwords.append('re')
-all_stopwords.append('ll')
-
-
-word_list = [x.lower() for x in tokenized_list]
+all_stopwords.append("i’ll")
+all_stopwords.append("i’m")
 
 hindi_stoplist = open("hindi_stoplist.txt").readlines()
 hindi_stoplist = [i.replace('\n', '') for i in hindi_stoplist]
+all_stopwords.append(hindi_stoplist)
 
-without_stopwords = [word.lower() for word in word_list if not word in all_stopwords and not word in string.punctuation and not word in hindi_stoplist]
+without_stopwords = [word for word in tokenized_list if not word in all_stopwords]
 
-print(without_stopwords)
+without_links = []
 
-# for lil in Counter(without_stopwords).most_common(50):
-#     print(lil[0], lil[1])
-# Create and generate a word cloud image:
-with_string = " ".join(without_stopwords)
-wordcloud = WordCloud(width=1600, height=800).generate(with_string)
+links = []
+
+for data in without_stopwords:
+    link = re.match(all_links, data)
+    if link:
+        links.append(link)
+    else:
+        without_links.append(data)
+
+with_string = " ".join(without_links)
+
+wordcloud = WordCloud(width=1800, height=900).generate(with_string)
 plt.figure(figsize=(20, 10))
-# # Display the generated image:
-plt.imshow(wordcloud, interpolation='bilinear')
 
+
+plt.imshow(wordcloud, interpolation='bilinear')
 plt.axis("off")
 plt.show()
