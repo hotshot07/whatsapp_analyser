@@ -5,6 +5,11 @@ from nltk.tokenize import word_tokenize
 from collections import Counter
 import string
 
+from datetime import date
+import calendar
+my_date = date.today()
+calendar.day_name[my_date.weekday()]
+
 df = pd.read_csv("bhav.csv")
 
 
@@ -24,6 +29,19 @@ all_stopwords.append('image')
 all_stopwords.append('h')
 all_stopwords.append('nan')
 all_stopwords.append('well')
+all_stopwords.append('spam')
+all_stopwords.append('https')
+all_stopwords.append('Mayank')
+all_stopwords.append('mayank')
+all_stopwords.append('image')
+all_stopwords.append('video')
+all_stopwords.append('message')
+all_stopwords.append('deleted')
+all_stopwords.append('pdf')
+all_stopwords.append('gif')
+all_stopwords.append('deleted')
+all_stopwords.append('sticker')
+
 
 word_list = [x.lower() for x in tokenized_list]
 
