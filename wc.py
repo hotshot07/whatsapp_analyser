@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
+from wordcloud import WordCloud
 from nltk.corpus import stopwords
 import string
 import matplotlib.pyplot as plt

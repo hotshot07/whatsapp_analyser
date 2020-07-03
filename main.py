@@ -73,7 +73,7 @@ def get_data(fileName):
         for line in chat:
             line = line.replace('\u200e', '')
             if line[0] != '[':
-                totalTable.append([' ', ' ', ' ', ' ', line.replace('\n', '')])
+                totalTable.append([np.NaN, np.NaN, np.NaN, np.NaN, line.replace('\n', '')])
             else:
                 try:
                     date, day, time = get_date_time_day(line)
