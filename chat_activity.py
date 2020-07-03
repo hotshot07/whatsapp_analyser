@@ -32,17 +32,17 @@ final_data["Messages"] = chat_list
 
 final_labels = []
 
-for x in manage_labels:
-    if type(x) is datetime.date and random.random() < 0.3:
+for num, x in enumerate(manage_labels):
+    if type(x) is datetime.date and num % 5 == 0 or num == 0 or num == len(manage_labels) - 1:
         final_labels.append(x.strftime("%B %d, %Y"))
     else:
         final_labels.append('')
 
 
-plt.figure(figsize=(25, 10))
+plt.figure(figsize=(20, 10))
 
-
-chart = sns.barplot(final_data["Date"], final_data["Messages"], alpha=1, palette='rocket', data=final_data)
+sns.set_context("paper")
+chart = sns.barplot(final_data["Date"], final_data["Messages"], alpha=1, palette='husl', data=final_data)
 
 chart.set_xticklabels(final_labels, rotation=90, fontweight='light', horizontalalignment='center', fontsize=6)
 plt.tight_layout()
