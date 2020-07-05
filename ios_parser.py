@@ -1,14 +1,15 @@
 import re
+import sys
 import numpy as np
+import pandas as pd
 from datetime import datetime
 import calendar
 from dateutil import parser
-import sys
-import pandas as pd
 
-regexDate = r"(\d\d\/\d\d/\d\d\d\d\, \d\d:\d\d)"
-regexUserName = r"\-\s([a-zA-z0-9 ]*)"
-regexUserNumber = r"\-[\s+\d\s]*:"
+regexDate = r"\[(\d*\/\d+\/\d+)\, (\d+\:\d+:\d+)\]"
+regexUserName = r"\]\s([a-zA-z0-9 ]*)"
+regexUserNumber = r"\+[\s+\d\s]*"
+# number2 = r"\+[+\s\w:]+"
 
 
 def get_date_time_day(line):
@@ -18,8 +19,9 @@ def get_date_time_day(line):
         Date, Day, Time = np.NaN, np.NaN, np.NaN
 
     else:
-        date_and_time = matchesDate.groups()
-        my_date_str = str(date_and_time[0])
+        Date = matchesDate.groups()[0]
+        Time = matchesDate.groups()[1]
+        my_date_str = str(Date) + ' ' + str(Time)
         try:
             datetime_obj = parser.parse(my_date_str, dayfirst=True)
             Date = datetime_obj.date().isoformat()
@@ -42,23 +44,19 @@ def get_user(line):
         Number = matchesNumber.group()
 
     if Name:
-        if "secured" in str(Name) or "changed" in str(Name):
-            return " "
-        else:
-            return str(Name)
+        return str(Name)
     else:
-        return str(Number[1:-1])
+        return str(Number)
 
 
 def get_message(line):
     colon = ':'
     counter = 0
-    message = ""
     for i in range(len(line)):
         if line[i] == colon:
             counter = counter + 1
 
-        if counter == 2:
+        if counter == 3:
             message = line[i + 2:]
             break
 
@@ -69,23 +67,33 @@ def get_message(line):
 def get_data(fileName):
 
     totalTable = []
-
     with open(fileName, 'r') as chat:
         for line in chat:
             line = line.replace('\u200e', '')
-
-            date, day, time = get_date_time_day(line)
-            if date is np.NaN:
+            if line[0] != '[':
                 totalTable.append([np.NaN, np.NaN, np.NaN, np.NaN, line.replace('\n', '')])
             else:
-                user = get_user(line)
-                message = get_message(line)
+                try:
+                    date, day, time = get_date_time_day(line)
+                except:
+                    pass
+
+                try:
+                    user = get_user(line)
+                except:
+                    pass
+
+                try:
+                    message = get_message(line)
+                except:
+                    pass
+
                 totalTable.append([date, day, time, user, message.replace('\n', '')])
 
     return totalTable
 
 
-def android_data(fileName):
+def ios_data(fileName):
     data = get_data(fileName)
 
     df = pd.DataFrame(columns=['Date', 'Day', 'Time', 'User', 'Message'])
