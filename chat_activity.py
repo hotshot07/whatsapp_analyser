@@ -1,12 +1,10 @@
-import numpy as np
+import datetime
+from datetime import date
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import warnings
 warnings.filterwarnings("ignore")
-import datetime
-import random
-from datetime import date
 
 df = pd.read_csv("userdata/chat.csv")
 
@@ -32,18 +30,31 @@ final_data["Messages"] = chat_list
 
 final_labels = []
 
+
+def get_spacing():
+    total_len = len(chat_list)
+    SPACING = 2
+    for i in range(0, total_len, 365):
+        SPACING += 1
+
+    return SPACING
+
+
+SPACING = get_spacing()
+
 for num, x in enumerate(manage_labels):
-    if type(x) is datetime.date and num % 5 == 0 or num == 0 or num == len(manage_labels) - 1:
+    if type(x) is datetime.date and num % SPACING == 0 or num == 0 or num == len(manage_labels) - 1:
         final_labels.append(x.strftime("%B %d, %Y"))
     else:
         final_labels.append('')
 
 
 plt.figure(figsize=(20, 10))
-
-sns.set_context("paper")
+# sns.set_context("paper")
 chart = sns.barplot(final_data["Date"], final_data["Messages"], alpha=1, palette='husl', data=final_data)
-
+plt.xlabel('Timeline', fontsize=18, fontname="Andale Mono")
+plt.ylabel('Messages', fontsize=16, fontname="Andale Mono")
+plt.title('Chat Activity', fontsize=20, fontname="Andale Mono")
 chart.set_xticklabels(final_labels, rotation=90, fontweight='light', horizontalalignment='center', fontsize=6)
 plt.tight_layout()
 plt.show()

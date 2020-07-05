@@ -9,14 +9,15 @@ import re
 import warnings
 warnings.filterwarnings("ignore")
 
-youtube_regex = r"^(https?\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$"
+#youtube_regex = r"^(https?\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$"
 
 all_links = r"^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$"
 
-df = pd.read_csv("userdata/chat.csv", index_col=0)
+df = pd.read_csv("userdata/chat.csv")
 
 
 word_list = [str(x) for x in df["Message"]]
+
 
 tokenized_list = []
 
@@ -27,34 +28,20 @@ for i in word_list:
         tokenized_list.append(word)
 
 
-all_stopwords = stopwords.words('english')
-all_stopwords.append('omitted')
-all_stopwords.append('image')
-all_stopwords.append('h')
-all_stopwords.append('nan')
-all_stopwords.append('well')
-all_stopwords.append('spam')
-all_stopwords.append('https')
-all_stopwords.append('Mayank')
-all_stopwords.append('mayank')
-all_stopwords.append('image')
-all_stopwords.append('video')
-all_stopwords.append('message')
-all_stopwords.append('deleted')
-all_stopwords.append('pdf')
-all_stopwords.append('gif')
-all_stopwords.append('deleted')
-all_stopwords.append('sticker')
-all_stopwords.append('re')
-all_stopwords.append("i’ll")
-all_stopwords.append("i’m")
+custom_list = ['omitted', 'image', "<media", "omitted>", 'hai', 'nan', 'well', 'spam', 'https', 'Mayank', 'mayank', 'image', 'video', 'message', 'deleted', 'pdf', 'gif', 'deleted',
+               'sticker', 're', "i’ll", "i’m"]
 
+all_stopwords = list(stopwords.words('english'))
 hindi_stoplist = open("hindi_stoplist.txt").readlines()
 hindi_stoplist = [i.replace('\n', '') for i in hindi_stoplist]
 
-all_stopwords.append(hindi_stoplist)
+all_stopwords = hindi_stoplist + custom_list
 
-without_stopwords = [word for word in tokenized_list if not word in all_stopwords]
+without_stopwords = []
+
+for word in tokenized_list:
+    if word not in all_stopwords:
+        without_stopwords.append(word)
 
 without_links = []
 
