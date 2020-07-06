@@ -53,16 +53,16 @@ The four images are
 3. user_activity.png (Total number of messages sent by each user)
 4. week_vis.png (chat activity day wise)
 
-timeline.png   
+  
 ![timeline](img/timeline.jpg)   
 
-wordcloud.png   
+
 ![wordcloud](img/wordcloud.jpg)
 
-user_activity.png   
+ 
 ![user_activity](img/user_activity.jpg)
 
-week_vis.png   
+
 ![week_vis](img/week_vis.jpg)
 
 
