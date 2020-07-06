@@ -10,12 +10,15 @@ def user_activity_vis(p_num):
     df = pd.read_csv("userdata/chat.csv", index_col=0)
 
     # df = df[~df['User'].isin(['added'])]
+    # removing top 3 rows (like when this group was created) and all
     df_user = df['User'].iloc[3:].value_counts()
 
+    # this shows up in username thanks to my excellent parsing skills
     del_list = ["added", "You", "left"]
 
     df_user2 = copy.deepcopy(df_user)
 
+    # oh why not just pass when an exception occurs?
     for key, value in df_user2.items():
         str_key = list(key.strip().split())
         for word in str_key:

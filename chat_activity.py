@@ -10,12 +10,17 @@ warnings.filterwarnings("ignore")
 def timeline(p_num):
     df = pd.read_csv("userdata/chat.csv")
 
+    #get total number of days on which messages were exchanged
     df_day = dict(df["Date"].dropna().value_counts(sort=False))
 
+    #make another series from start to end date
     date_range = pd.date_range(start=str(df["Date"][0]), end=str(df["Date"][df.index[-1]]))
 
+    #list to append number of messages that were exchanged on that day
     chat_list = []
 
+    # list to manage the labelling of x axis so it isn't a single black line with
+    # all the dates on yop of each other
     manage_labels = []
 
     for i in date_range:
@@ -30,8 +35,20 @@ def timeline(p_num):
 
     final_data["Messages"] = chat_list
 
+    # final data is dataframe 
+    # where date includes ALL the dates (even the ones where chat is 0)
+    # Messages is total number of messages exchanged that day
+    # -----------------------------
+    # |    Date    |   Messages   |
+    # -----------------------------
+    # |            |              |
+
     final_labels = []
 
+    # --------Genius function here don't mod this thank you---
+    # --------------- shorturl.at/fmoMY ----------------------
+    # a function to manage labels based on how long you've been chatting
+    # SPACING is then used 
     def get_spacing():
         total_len = len(chat_list)
         SPACING = 2
@@ -42,21 +59,25 @@ def timeline(p_num):
 
     SPACING = get_spacing()
 
+    # ---------Genius ends------------------------------------
+
+    # Function to manage labels
+    # The first and last message date is always present
+    # Rest spacing is increased to manage the space between two consecutive labels by modding it
     for num, x in enumerate(manage_labels):
         if type(x) is datetime.date and num % SPACING == 0 or num == 0 or num == len(manage_labels) - 1:
             final_labels.append(x.strftime("%B %d, %Y"))
         else:
             final_labels.append('')
 
+    # Creating the figure
     plt.figure(p_num, figsize=(20, 10))
     sns.set_context("paper")
     chart = sns.barplot(final_data["Date"], final_data["Messages"], alpha=1, palette='husl', data=final_data)
-    #chart.set(xlabel='Timeline', ylabel='Messages')
-    # plt.figure(num=p_num)
     plt.xlabel('Timeline', fontsize=18, fontname="Andale Mono")
     plt.ylabel('Messages exchanged', fontsize=16, fontname="Andale Mono")
     plt.title('Chat Activity', fontsize=20, fontname="Andale Mono")
     chart.set_xticklabels(final_labels, rotation=90, fontweight='light', horizontalalignment='center', fontsize=6)
     plt.tight_layout()
     plt.savefig("output/timeline.png")
-    return 1
+    return

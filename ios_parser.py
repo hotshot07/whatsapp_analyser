@@ -1,3 +1,10 @@
+# pretty much same as android parser except a changes
+# (read android parser comments)
+# key changes -> iOS has seconds in timestamp
+# timestamp isn't between '[ ]'
+# android has '-' after timestamp, iOS has '-'
+# modded the regex accordingly
+
 import re
 import sys
 import numpy as np
@@ -50,6 +57,8 @@ def get_user(line):
 
 
 def get_message(line):
+    # like literally everything after the third colon is the message
+    # so why use regex when can get number of colons ahaha
     colon = ':'
     counter = 0
     for i in range(len(line)):
@@ -60,7 +69,6 @@ def get_message(line):
             message = line[i + 2:]
             break
 
-    counter = 0
     return message
 
 
@@ -69,7 +77,11 @@ def get_data(fileName):
     totalTable = []
     with open(fileName, 'r') as chat:
         for line in chat:
+            # weird typesetting thing I have to remove
             line = line.replace('\u200e', '')
+            # if line doesn't start with a timestamp, its a continuation
+            # of previous message, so just append the content while removing the
+            # newline character, else get data from it
             if line[0] != '[':
                 totalTable.append([np.NaN, np.NaN, np.NaN, np.NaN, line.replace('\n', '')])
             else:

@@ -6,7 +6,6 @@ aapne
 aata
 aati
 aaya
-aaye
 ab
 abe
 able
@@ -26,12 +25,9 @@ amongst
 an
 and
 any
-anyway
-anyways
 anywhere
 ap
 apart
-apna
 apnaa
 apne
 apni
@@ -50,8 +46,6 @@ bad
 banae
 banai
 banao
-bc
-be
 became
 because
 been
@@ -64,13 +58,10 @@ best
 better
 between
 beyond
-bhai
 bheetar
 bhi
 bhitar
 bht
-bilkul
-bohot
 bol
 bola
 bole
@@ -81,7 +72,6 @@ bolte
 bolti
 both
 brief
-bro
 btw
 but
 by
@@ -96,11 +86,9 @@ certain
 certainly
 chahiye
 chaiye
-chal
 chalega
 chhaiye
 clearly
-c'mon
 com
 come
 comes
@@ -110,7 +98,6 @@ couldnt
 couldn't
 d
 de
-dede
 dega
 degi
 dekh
@@ -119,7 +106,6 @@ dekhe
 dekhi
 dekho
 denge
-dhang
 di
 did
 didn
@@ -189,15 +175,12 @@ for
 forth
 four
 from
-further
-furthermore
 gaya
 gaye
 gayi
 get
 gets
 getting
-ghar
 given
 gives
 go
@@ -215,13 +198,12 @@ hadn
 hadnt
 hadn't
 hai
+ hai
 hain
 hamara
 hamare
 hamari
 hamne
-han
-happens
 har
 hardly
 has
