@@ -6,7 +6,6 @@ from wc import make_wordcloud
 from weekday_vis import make_week_vis
 from user_activity import user_activity_vis
 from chat_activity import timeline
-from progress import printProgressBar
 
 
 if __name__ == '__main__':
@@ -42,7 +41,6 @@ if __name__ == '__main__':
     # Parsing the .txt file
     # ios and android users have different styles of storing data
     # it produces output in userdata/chat.csv
-    printProgressBar()
     print("Processing data ...")
     if sys.argv[1] == 'ios':
         ios_data(fileName)
@@ -57,16 +55,16 @@ if __name__ == '__main__':
     # TODO
     # Progress bar perhaps?
 
-    print("Creating WordCloud ...")
+    print("Creating word cloud ...")
     make_wordcloud(1)
 
     print("Creating weekday visualization ...")
     make_week_vis(2)
 
-    print("Creating Timeline ...")
+    print("Creating timeline ...")
     timeline(3)
 
-    print("Getting user activity ...")
+    print("Creating user activity ...")
     user_activity_vis(4)
 
     print("Done! Please check the output folder")

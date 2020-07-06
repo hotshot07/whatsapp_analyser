@@ -1,0 +1,18 @@
+click==7.1.2
+cycler==0.10.0
+joblib==0.16.0
+kiwisolver==1.2.0
+matplotlib==3.2.2
+nltk==3.5
+numpy==1.19.0
+pandas==1.0.5
+Pillow==7.2.0
+pyparsing==2.4.7
+python-dateutil==2.8.1
+pytz==2020.1
+regex==2020.6.8
+scipy==1.5.0
+seaborn==0.10.1
+six==1.15.0
+tqdm==4.47.0
+wordcloud @ file:///Users/hotshot07/Desktop/github/whatsapp_analyser/word_cloud
