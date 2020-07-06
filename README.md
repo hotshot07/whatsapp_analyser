@@ -29,6 +29,9 @@ If you see a (whatsapp) in front of your terminal screen, the virtual environmen
 
 `pip3 install -r requirements.txt`
 
+To install the stopwords list, use    
+`python3 -m nltk.downloader stopwords`
+
 
 ## Getting Data   
 Create a new folder named 'data' to keep the directory clean.  
