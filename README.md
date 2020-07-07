@@ -66,6 +66,20 @@ The four images are
 ![week_vis](img/week_vis.jpg)
 
 
+## Issues  
+ 
+This analyser has been tested on whatsapp chats from iPhone 11 running iOS 13.5.1   
+It works fine for both individual and group chats.  
+
+In some cases, especially for android, the date parser might not be able to parse properly as different devices export whatsapp chat differently. In line 13 of android_parser.py, you'll see the regex of the date. Try to compare it to your .txt file and change it if you get an issue. If it persists, raise an issue on github and I'll try to fix it ASAP. 
+
+
+## Contributing
+
+Feel free to contribute and send any pull requests!  
+
+
+
 
 
 
