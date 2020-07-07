@@ -11,10 +11,10 @@ def user_activity_vis(p_num):
 
     # df = df[~df['User'].isin(['added'])]
     # removing top 3 rows (like when this group was created) and all
-    df_user = df['User'].iloc[3:].value_counts()
+    df_user = df['User'].dropna().iloc[3:].value_counts()
 
     # this shows up in username thanks to my excellent parsing skills
-    del_list = ["added", "You", "left"]
+    del_list = ["added", "You", "left", "changed"]
 
     df_user2 = copy.deepcopy(df_user)
 

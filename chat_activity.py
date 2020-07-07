@@ -20,7 +20,7 @@ def timeline(p_num):
     chat_list = []
 
     # list to manage the labelling of x axis so it isn't a single black line with
-    # all the dates on yop of each other
+    # all the dates on top of each other
     manage_labels = []
 
     for i in date_range:
@@ -46,9 +46,10 @@ def timeline(p_num):
     final_labels = []
 
     # --------Genius function here don't mod this thank you---
-    # --------------- shorturl.at/fmoMY ----------------------
+    # https://tenor.com/view/jeremy-clarkson-sometimes-my-genius-almost-frightening-driving-car-ride-gif-16463163
     # a function to manage labels based on how long you've been chatting
-    # SPACING is then used 
+    # SPACING is then used in function below
+    # hint: 365 are days in the year
     def get_spacing():
         total_len = len(chat_list)
         SPACING = 2

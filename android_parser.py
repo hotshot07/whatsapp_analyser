@@ -1,6 +1,6 @@
 # android parser
 # android .txt files don't have seconds in timestamp
-# the way it's writen is similar yet a bit different
+# the way it's writen is similar to iOS yet a bit different
 # it doesn't use '[' for timestamp, infact it doesn't use anything at all
 
 import re
@@ -58,6 +58,7 @@ def get_user(line):
         return str(Number[1:-1])
 
 # hack to get user messages
+# everything after the second column is a message so :)
 def get_message(line):
     colon = ':'
     counter = 0

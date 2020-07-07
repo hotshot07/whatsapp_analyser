@@ -20,16 +20,16 @@ def make_wordcloud(p_num):
 
     tokenized_list = []
 
-    # the most inefficient way possitble to tokenize list :)
+    # creating a list of strings of individual words of the messages
     for i in word_list:
         sep_wordlist = i.split(sep=' ')
         for word in sep_wordlist:
             word = word.lower().strip()
             tokenized_list.append(word)
 
-    # add a word to this list to make it not appear in the wordcloud
+    # add a word to this list to make it NOT appear in the wordcloud
     custom_list = ['omitted', 'image', "<media", "omitted>", 'hai', "hai", 'nan', 'well', 'spam', 'https', 'Mayank', 'mayank', 'image', 'video', 'message', 'deleted', 'pdf', 'gif', 'deleted',
-                   'sticker', "i’ll", "i’m", "Messages", "to", "this", "group", "are", "now", "secured", "with", "to", "end", "end encryption"]
+                   'sticker', "document", "i’ll", "i’m", "Messages", "to", "this", "group", "are", "now", "secured", "with", "to", "end", "end encryption"]
 
     english_stopwords = ['i', 'me', 'my', 'myself', 'we', 'our', 'ours', 'ourselves', 'you', "you're", "you've", "you'll", "you'd", 'your', 'yours', 'yourself', 'yourselves', 'he',
                          'him', 'his', 'himself', 'she', "she's", 'her', 'hers', 'herself', 'it',
@@ -53,12 +53,12 @@ def make_wordcloud(p_num):
     hindi_stoplist = open("hindi_stoplist.txt").readlines()
     hindi_stoplist = [i.replace('\n', '') for i in hindi_stoplist]
 
-    # actually a hinglish stoplist
+    # actually a hinglish stoplist now
     all_stopwords = english_stopwords + hindi_stoplist + custom_list
 
     without_stopwords = []
 
-    # oh well iterating the list twice
+    # oh well iterating the list twice in two loops below
     # should've added the 'check if link' feature in here itself
     for word in tokenized_list:
         if word not in all_stopwords:
@@ -77,6 +77,7 @@ def make_wordcloud(p_num):
         else:
             without_links.append(data)
 
+    # wordcloud only accepts string as input
     with_string = " ".join(without_links)
 
     # trying to remove a couple of weird characters that keep on appearing
@@ -94,5 +95,5 @@ def make_wordcloud(p_num):
 
 
 # Testing
-if __name__ == '__main__':
-    make_wordcloud(2)
+# if __name__ == '__main__':
+#     make_wordcloud(2)

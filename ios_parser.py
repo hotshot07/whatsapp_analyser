@@ -2,11 +2,10 @@
 # (read android parser comments)
 # key changes -> iOS has seconds in timestamp
 # timestamp isn't between '[ ]'
-# android has '-' after timestamp, iOS has '-'
+# android has '-' after timestamp, iOS has nothing
 # modded the regex accordingly
 
 import re
-import sys
 import numpy as np
 import pandas as pd
 from datetime import datetime
@@ -51,14 +50,18 @@ def get_user(line):
         Number = matchesNumber.group()
 
     if Name:
-        return str(Name)
+        if "changed" in str(Name) or "secured" in str(Name):
+            return np.NaN
+        else:
+            return str(Name)
     else:
         return str(Number)
 
 
 def get_message(line):
     # like literally everything after the third colon is the message
-    # so why use regex when can get number of colons ahaha
+    # so why use regex when can get number of colons ha
+    message = ''
     colon = ':'
     counter = 0
     for i in range(len(line)):
@@ -68,7 +71,7 @@ def get_message(line):
         if counter == 3:
             message = line[i + 2:]
             break
-
+    counter = 0
     return message
 
 
@@ -85,24 +88,14 @@ def get_data(fileName):
             if line[0] != '[':
                 totalTable.append([np.NaN, np.NaN, np.NaN, np.NaN, line.replace('\n', '')])
             else:
-                try:
-                    date, day, time = get_date_time_day(line)
-                except:
-                    pass
-
-                try:
-                    user = get_user(line)
-                except:
-                    pass
-
-                try:
-                    message = get_message(line)
-                except:
-                    pass
-
+                date, day, time = get_date_time_day(line)
+                user = get_user(line)
+                message = get_message(line)
                 totalTable.append([date, day, time, user, message.replace('\n', '')])
 
     return totalTable
+
+# the main function that's exported
 
 
 def ios_data(fileName):
