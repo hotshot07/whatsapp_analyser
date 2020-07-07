@@ -1,5 +1,7 @@
 # Whatsapp chat analysis
 
+[![CodeFactor](https://www.codefactor.io/repository/github/hotshot07/whatsapp_analyser/badge/master)](https://www.codefactor.io/repository/github/hotshot07/whatsapp_analyser/overview/master)
+
 ![wordcloud](img/wordcloud.jpg)
 
 ## Getting Started
