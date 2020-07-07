@@ -52,9 +52,6 @@ if __name__ == '__main__':
     # lets not be afraid to ask for help
     # https://stackoverflow.com/questions/62737270/matplotlib-import-issue-across-modules
 
-    # TODO
-    # Progress bar perhaps?
-
     print("Creating word cloud ...")
     make_wordcloud(1)
 

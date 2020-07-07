@@ -59,6 +59,8 @@ def get_user(line):
 
 # hack to get user messages
 # everything after the second column is a message so :)
+
+
 def get_message(line):
     colon = ':'
     counter = 0
@@ -80,7 +82,7 @@ def get_data(fileName):
 
     totalTable = []
 
-    with open(fileName, 'r') as chat:
+    with open(fileName, 'r', encoding='UTF-8') as chat:
         for line in chat:
             # removing weird typesetting character found in front of images
             line = line.replace('\u200e', '')

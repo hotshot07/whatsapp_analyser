@@ -78,7 +78,7 @@ def get_message(line):
 def get_data(fileName):
 
     totalTable = []
-    with open(fileName, 'r') as chat:
+    with open(fileName, 'r', encoding='UTF-8') as chat:
         for line in chat:
             # weird typesetting thing I have to remove
             line = line.replace('\u200e', '')
