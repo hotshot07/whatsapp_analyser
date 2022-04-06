@@ -3,7 +3,7 @@ cycler==0.10.0
 joblib==0.16.0
 kiwisolver==1.2.0
 matplotlib==3.2.2
-nltk==3.6.5
+nltk==3.6.6
 numpy==1.19.0
 pandas==1.0.5
 Pillow==9.0.1
