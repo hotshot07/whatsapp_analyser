@@ -1,6 +1,6 @@
 click==7.1.2
 cycler==0.10.0
-joblib==0.16.0
+joblib==1.2.0
 kiwisolver==1.2.0
 matplotlib==3.2.2
 nltk==3.6.5
