@@ -11,7 +11,7 @@ pyparsing==2.4.7
 python-dateutil==2.8.1
 pytz==2020.1
 regex==2020.6.8
-scipy==1.5.0
+scipy==1.10.0
 seaborn==0.10.1
 six==1.15.0
 tqdm==4.47.0
